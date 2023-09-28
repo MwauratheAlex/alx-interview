@@ -4,9 +4,11 @@
 
 def pascal_triangle(n):
     """
-    n: integer
+    Generates rows of Pascal's triangle up to the nth row.
+    Args:
+        n: integer
     Return: a list of lists of integers representing the Pascal’s triangle of n
-    returns an empty list if n <= 0
+        or returns an empty list if n <= 0
     """
     triangle = []
     if n <= 0:
