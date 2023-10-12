@@ -13,14 +13,21 @@ def minOperations(n):
     Return: the fewest number of operations needed to result in exactly
     n H characters in the file.
     """
-    if n <= 0:
-        return 0
-    operations = 0
-    divisor = 2  # lowest prime
+    current_h_count = 1
+    copied_h_count = 0
+    steps = 0
 
-    while n > 1:
-        while n % divisor == 0:
-            n //= divisor
-            operations += divisor
-        divisor += 1
-    return operations
+    while current_h_count < n:
+        if n % current_h_count == 0:
+            # copy
+            copied_h_count = current_h_count
+            steps += 1
+            # paste
+            current_h_count += copied_h_count
+            steps += 1
+        else:
+            # paste
+            current_h_count += copied_h_count
+            steps += 1
+
+    return steps
