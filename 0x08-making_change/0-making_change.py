@@ -1,14 +1,15 @@
 #!/usr/bin/python3
 """This module contains the function makeChange(coins, amount)"""
 
+
 def makeChange(coins, total):
     """determines the fewest number of coins
     needed to meet a given amount total
 
     Args:
       coins: (int[]) array of coins
-      total: (int) amout to get change for 
-    Returns: fewest coins to make total     
+      total: (int) amout to get change for
+    Returns: fewest coins to make total
     """
     if total <= 0:
         return 0
@@ -18,4 +19,4 @@ def makeChange(coins, total):
         for c in coins:
             if a - c >= 0:
                 dp[a] = min(dp[a], 1 + dp[a - c])
-    return dp[total] if dp[total] != total + 1 else - 1 
+    return dp[total] if dp[total] != total + 1 else - 1
