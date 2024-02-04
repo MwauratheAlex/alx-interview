@@ -13,10 +13,17 @@ def makeChange(coins, total):
     """
     if total <= 0:
         return 0
-    dp = [float('inf') for i in range(total + 1)]
-    dp[0] = 0
-    for coin in coins:
-        for amount in range(coin, total + 1):
-            dp[amount] = min(dp[amount], dp[amount - coin] + 1)
-    out = dp[amount]
-    return out if out != float('inf') else -1
+    rem = total
+    coin_idx = 0
+    n = len(coins)
+    coin_count = 0
+    sorted_coins = sorted(coins, reverse=True)
+    while rem > 0:
+        if coin_idx >= n:
+            return -1
+        if rem - sorted_coins[coin_idx] >= 0:
+            rem -= sorted_coins[coin_idx]
+            coin_count += 1
+        else:
+            coin_idx += 1
+    return coin_count
