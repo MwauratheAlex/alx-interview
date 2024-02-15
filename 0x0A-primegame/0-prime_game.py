@@ -36,6 +36,8 @@ def getPrimes(n):
 
 def isWinner(x, nums):
     """Returns the winner of a prime game"""
+    if type(x) is not int:
+        return None
     wins = {'Ben': 0, 'Maria': 0}
     for i in range(x):
         stop = nums[i]
@@ -44,5 +46,8 @@ def isWinner(x, nums):
             wins['Ben'] += 1
         else:
             wins['Maria'] += 1
+
+    if wins['Ben'] == wins['Maria']:
+        return None
 
     return 'Ben' if wins['Ben'] > wins['Maria'] else 'Maria'
