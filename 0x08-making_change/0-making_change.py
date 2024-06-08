@@ -12,12 +12,12 @@ Return: fewest number of coins needed to meet total
 def makeChange(coins, total):
     if total <= 0:
         return 0
-    dp = [float('Infinity')] * (total + 1)
+    dp = [float('inf')] * (total + 1)
     dp[0] = 0
 
     for coin in coins:
-        for value in range(total + 1):
-            if dp[value - coin] != float('Infinity'):
+        for value in range(coin, total + 1):
+            if dp[value - coin] != float('inf'):
                 dp[value] = min(dp[value], 1 + dp[value - coin])
 
     if dp[total] == float('Infinity'):
