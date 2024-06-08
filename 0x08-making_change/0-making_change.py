@@ -15,11 +15,10 @@ def makeChange(coins, total):
     dp = [float('Infinity')] * (total + 1)
     dp[0] = 0
 
-    for value in range(1, len(dp)):
-        for coin in coins:
-            if coin > value:
-                continue
-            dp[value] = min(dp[value], 1 + dp[value - coin])
+    for coin in coins:
+        for value in range(total + 1):
+            if dp[value - coin] != float('Infinity'):
+                dp[value] = min(dp[value], 1 + dp[value - coin])
 
     if dp[total] == float('Infinity'):
         return -1
