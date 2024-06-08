@@ -1,8 +1,17 @@
 #!/usr/bin/python3
-# Return: fewest number of coins needed to meet total
-# If total is 0 or less, return 0
-# If total cannot be met by any number of coins you have, return -1
+
+"""
+makeChange - determine the fewest number of coins needed to meet a given
+    amount total
+Return: fewest number of coins needed to meet total
+    If total is 0 or less, return 0
+    If total cannot be met by any number of coins you have, return -1
+"""
+
+
 def makeChange(coins, total):
+    if total <= 0:
+        return 0
     dp = [float('Infinity')] * (total + 1)
     dp[0] = 0
 
