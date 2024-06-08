@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 # Return: fewest number of coins needed to meet total
 # If total is 0 or less, return 0
 # If total cannot be met by any number of coins you have, return -1
