@@ -29,10 +29,10 @@ def get_primes(n, primes_memo):
 
 
 def isWinner(x, nums):
-    primes_memo = []
     """gets the winner of a prime game
     where x is the number of rounds and nums is an array of n
     """
+    primes_memo = []
     prev_len = 0
     winner = [0,  0]
     streak = True
