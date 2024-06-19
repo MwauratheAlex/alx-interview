@@ -2,10 +2,8 @@
 """prime game module
 """
 
-primes_memo = []
 
-
-def get_primes(n):
+def get_primes(n, primes_memo):
     primes = [True for _ in range(n + 1)]
     p = 2
     if len(primes_memo) > 0:
@@ -28,20 +26,20 @@ def get_primes(n):
 
 
 def isWinner(x, nums):
+    primes_memo = []
     """gets the winner of a prime game
     where x is the number of rounds and nums is an array of n
     """
-    ben = 0
-    maria = 0
     prev_len = 0
+    winner = [0,  0]
+    streak = True
     for i in range(x):
         n = nums[i]
-        get_primes(n)
+        get_primes(n, primes_memo)
 
         if len(primes_memo) != prev_len:
+            streak = not streak
             prev_len = len(primes_memo)
-            maria += 1
-        else:
-            ben += 1
+        winner[int(streak)] += 1
 
-    return 'Ben' if ben > maria else 'Maria'
+    return 'Ben' if winner[1] > winner[0] else 'Maria'
