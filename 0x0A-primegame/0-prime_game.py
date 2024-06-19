@@ -4,6 +4,9 @@
 
 
 def get_primes(n, primes_memo):
+    """gets the winner of a prime game
+    where x is the number of rounds and nums is an array of n
+    """
     primes = [True for _ in range(n + 1)]
     p = 2
     if len(primes_memo) > 0:
