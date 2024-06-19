@@ -45,4 +45,6 @@ def isWinner(x, nums):
             prev_len = len(primes_memo)
         winner[int(streak)] += 1
 
+    if winner[0] == winner[1]:
+        return None
     return 'Ben' if winner[1] > winner[0] else 'Maria'
