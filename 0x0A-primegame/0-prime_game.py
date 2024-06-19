@@ -33,10 +33,13 @@ def isWinner(x, nums):
     """
     ben = 0
     maria = 0
+    prev_len = 0
     for i in range(x):
         n = nums[i]
         get_primes(n)
-        if len(primes_memo) % 2 == 0:
+
+        if len(primes_memo) != prev_len:
+            prev_len = len(primes_memo)
             maria += 1
         else:
             ben += 1
