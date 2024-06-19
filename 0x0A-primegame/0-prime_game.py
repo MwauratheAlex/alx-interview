@@ -31,11 +31,14 @@ def isWinner(x, nums):
     """gets the winner of a prime game
     where x is the number of rounds and nums is an array of n
     """
+    ben = 0
+    maria = 0
     for i in range(x):
         n = nums[i]
         get_primes(n)
+        if len(primes_memo) % 2 == 0:
+            maria += 1
+        else:
+            ben += 1
 
-    print(primes_memo)
-    if len(primes_memo) % 2 != 0:
-        return 'Ben'
-    return 'Maria'
+    return 'Ben' if ben > maria else 'Maria'
