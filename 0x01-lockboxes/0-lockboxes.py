@@ -4,16 +4,19 @@
 
 def canUnlockAll(boxes):
     """Returns true if all boxes can be unlocked else false"""
-    stack = [0]
     n = len(boxes)
-    unlocked = set([0])
-
+    unlocked = [False] * n
+    unlocked[0] = True
+    stack = [0]
     while stack:
         curr = stack.pop()
+
+        if not unlocked[curr]:
+            continue
+
         for key in boxes[curr]:
-            if key not in unlocked and 0 <= key <= n:
-                unlocked.add(key)
+            if 0 <= key < n and not unlocked[key]:
                 stack.append(key)
-                if len(unlocked) == n:
-                    return True
-    return False
+                unlocked[key] = True
+
+    return all(unlocked)
