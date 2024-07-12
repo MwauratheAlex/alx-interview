@@ -9,25 +9,18 @@ log_entry_pattern = re.compile(
     r'\d{2}:\d{2}\.\d{6})\] "GET /projects/260 HTTP/1\.1" ' +
     r'(?P<status>\d{3}) (?P<size>\d+)$'
 )
-log_object = {
-    "total_size": 0,
-    "no_line_per_code": {
-        '200': 0,
-        '301': 0,
-        '400': 0,
-        '401': 0,
-        '403': 0,
-        '404': 0,
-        '405': 0,
-        '500': 0,
-    }
-}
+
+total_size = 0
+code_lines = {}
 
 
 def print_stuff():
-    print(f"File size: {log_object['total_size']}")
-    for status_code, number in log_object['no_line_per_code'].items():
-        print(f"{status_code}: {number}")
+    print(f"File size: {total_size}")
+    sorted_code_lines = list(code_lines.keys())
+    sorted_code_lines.sort()
+
+    for status_code in sorted_code_lines:
+        print(f"{status_code}: {code_lines[status_code]}")
 
 
 def signal_handler(signal, frame):
@@ -41,8 +34,15 @@ count = 0
 for line in sys.stdin:
     match = log_entry_pattern.match(line.strip())
     if match:
-        log_object['total_size'] += int(match.group('size'))
-        log_object['no_line_per_code'][match.group('status')] += 1
+        file_size = int(match.group('size'))
+        try:
+            status_code = int(match.group('status'))
+        except Exception:
+            continue
+        total_size += file_size
+        if status_code not in code_lines:
+            code_lines[status_code] = 0
+        code_lines[status_code] += 1
         count += 1
 
     if count % 10 == 0:
