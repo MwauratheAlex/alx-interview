@@ -25,6 +25,7 @@ def print_stuff():
 
 def signal_handler(signal, frame):
     print_stuff()
+    sys.exit(0)
 
 
 signal.signal(signal.SIGINT, signal_handler)
@@ -47,3 +48,5 @@ for line in sys.stdin:
 
     if count % 10 == 0:
         print_stuff()
+
+print_stuff()
