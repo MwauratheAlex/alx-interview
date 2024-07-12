@@ -39,7 +39,7 @@ signal.signal(signal.SIGINT, signal_handler)
 
 count = 0
 for line in sys.stdin:
-    match = log_entry_pattern.match(line.rstrip())
+    match = log_entry_pattern.match(line.strip())
     if match:
         log_object['total_size'] += int(match.group('size'))
         log_object['no_line_per_code'][match.group('status')] += 1
