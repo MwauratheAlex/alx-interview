@@ -5,7 +5,7 @@ import signal
 import re
 
 log_entry_pattern = re.compile(
-    r'^(?P<ip>(?:\d{1,3}\.){3}\d{1,3}) - \[(?P<date>\d{4}-\d{2}-\d{2} \d{2}:' +
+    r'^(?P<ip>[^\s]+)\s*-\s*\[(?P<date>\d{4}-\d{2}-\d{2} \d{2}:' +
     r'\d{2}:\d{2}\.\d{6})\] "GET /projects/260 HTTP/1\.1" ' +
     r'(?P<status>\d{3}) (?P<size>\d+)$'
 )
@@ -15,12 +15,12 @@ code_lines = {}
 
 
 def print_stuff():
-    print(f"File size: {total_size}")
+    print(f"File size: {total_size}", flush=True)
     sorted_code_lines = list(code_lines.keys())
     sorted_code_lines.sort()
 
     for status_code in sorted_code_lines:
-        print(f"{status_code}: {code_lines[status_code]}")
+        print(f"{status_code}: {code_lines[status_code]}", flush=True)
 
 
 def signal_handler(signal, frame):
