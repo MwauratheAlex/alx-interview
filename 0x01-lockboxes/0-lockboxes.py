@@ -4,23 +4,16 @@
 
 def canUnlockAll(boxes):
     """Returns true if all boxes can be unlocked else false"""
-    unlocked = [False] * len(boxes)
-    unlocked[0] = True
-    seen = [False] * len(boxes)
+    stack = [0]
+    n = len(boxes)
+    unlocked = set([0])
 
-    traverse(boxes, 0, unlocked, seen)
-    return all(unlocked)
-
-
-def traverse(boxes, curr, unlocked, seen):
-    """traverses a list of boxes recursively"""
-    if seen[curr]:
-        return
-
-    seen[curr] = True
-    box = boxes[curr]
-    if unlocked[curr]:
-        for key in box:
-            if 0 <= key < len(boxes):
-                unlocked[key] = True
-                traverse(boxes, key, unlocked, seen)
+    while stack:
+        curr = stack.pop()
+        for key in boxes[curr]:
+            if key not in unlocked and 0 <= key <= n:
+                unlocked.add(key)
+                stack.append(key)
+                if len(unlocked) == n:
+                    return True
+    return False
